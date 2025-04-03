@@ -48,9 +48,13 @@ export function UserFactory(sequelize: Sequelize): typeof User {
         beforeCreate: async (user: User) => {
           await user.setPassword(user.password);
         },
+        // That way it only re-hashes if the password actually changed — no more double hashing.
         beforeUpdate: async (user: User) => {
-          await user.setPassword(user.password);
-        },
+          if (user.changed('password')) {
+            await user.setPassword(user.password);
+          }
+        }
+        
       }
     }
   );
