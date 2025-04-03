@@ -16,30 +16,56 @@ const Navbar = () => {
     checkLogin();
   }, [loginCheck])
 
+  // return (
+  //   <div className='nav'>
+  //     <div className='nav-title'>
+  //       <Link to='/'>Krazy Kanban Board</Link>
+  //     </div>
+  //     <ul>
+  //     {
+  //       !loginCheck ? (
+  //         <li className='nav-item'>
+  //           <button type='button'>
+  //             <Link to='/login'>Login</Link>
+  //           </button>
+  //         </li>
+  //       ) : (
+  //         <li className='nav-item'>
+  //           <button type='button' onClick={() => {
+  //             auth.logout();
+  //           }}>Logout</button>
+  //         </li>
+  //       )
+  //     }
+  //     </ul>
+  //   </div>
+  // )
   return (
     <div className='nav'>
       <div className='nav-title'>
         <Link to='/'>Krazy Kanban Board</Link>
       </div>
       <ul>
-      {
-        !loginCheck ? (
+        {loginCheck ? (
+          <>
+            <li className='nav-item'>
+              <Link className='nav-link' to='/create' id='create-ticket-link'>New Ticket</Link>
+            </li>
+            <li className='nav-item'>
+              <button type='button' onClick={() => auth.logout()}>Logout</button>
+            </li>
+          </>
+        ) : (
           <li className='nav-item'>
             <button type='button'>
               <Link to='/login'>Login</Link>
             </button>
           </li>
-        ) : (
-          <li className='nav-item'>
-            <button type='button' onClick={() => {
-              auth.logout();
-            }}>Logout</button>
-          </li>
-        )
-      }
+        )}
       </ul>
     </div>
-  )
+  );
+  
 }
 
 export default Navbar;
