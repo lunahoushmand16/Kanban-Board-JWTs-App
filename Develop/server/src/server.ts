@@ -5,8 +5,13 @@ dotenv.config();
 
 import express from 'express';
 import path from 'path'; // ⬅️ Add this line
+import { fileURLToPath } from 'url'; // ⬅️ add this
+import { dirname } from 'path';       // ⬅️ add this
 import routes from './routes/index.js';
 import { sequelize } from './models/index.js';
+
+const __filename = fileURLToPath(import.meta.url); // ⬅️ add this
+const __dirname = dirname(__filename);             // ⬅️ add this
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3001;
